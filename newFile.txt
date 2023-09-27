@@ -1,0 +1,1 @@
+This data is written via a custom function in a new file, with the help of fs module.Furthermore, this data too is appended to the file with the help of append function from fs module
