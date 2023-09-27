@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+table tr{
+    transition: all 0.5s ease-out;
+}
+table tr:hover{
+    background-color: azure;
+}
+table th, table td{
+    border: 1px solid;
+    text-align: center;
+    padding: 5px;
+}
