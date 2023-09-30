@@ -9,22 +9,22 @@ function App() {
   const [age, setAge] = useState("");
   const [phone, setPhone] = useState("");
 
-  const risabhIdharDekho = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post("http://localhost:4000/new", {
+      .post("http://localhost:4000/student/new", {
         name: name,
         age: age,
         phone: phone,
       })
       .then((result) => {
-        console.log(result);
-        if(result.statusText === "OK")  navigate("/");
+        // console.log(result);
+        if(result.status === 201 && result.statusText === "Created")  navigate("/");
       });
   };
   return (
     <>
-      <form onSubmit={risabhIdharDekho}>
+      <form onSubmit={handleSubmit}>
         <div className="htmlForm-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
 
