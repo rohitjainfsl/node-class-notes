@@ -4,22 +4,33 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [phone, setPhone] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    // console.log(e.target.files)
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("age", age);
+    formData.append("phone", phone);
+    formData.append("profilePicture", profilePicture);
     axios
-      .post("http://localhost:4000/student/new", {
-        name: name,
-        age: age,
-        phone: phone,
+      .post("http://localhost:4000/student/new", 
+        formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
       })
       .then((result) => {
         // console.log(result);
-        if(result.status === 201 && result.statusText === "Created")  navigate("/");
+        if (result.status === 201 && result.statusText === "Created")
+          navigate("/");
       });
   };
   return (
@@ -58,6 +69,15 @@ function App() {
             className="htmlForm-control"
             id="exampleInputPhone"
             placeholder="Phone"
+          />
+        </div>
+        <div className="htmlForm-group">
+          <label htmlFor="exampleInputProfilePicture">Profile Picture</label>
+          <input
+            onChange={(e) => setProfilePicture(e.target.files[0])}
+            type="file"
+            className="htmlForm-control-file"
+            id="exampleInputProfilePicture"
           />
         </div>
 
